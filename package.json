@@ -1,14 +1,16 @@
 {
-  "name": "temporal-collisions",
+  "name": "you-mean",
   "version": "1.0.0",
   "description": "TK",
   "type": "module",
   "devDependencies": {
     "@types/jest": "~27.4",
-    "@types/lodash": "^4.14.179",
+    "@types/lodash": "^4.14.180",
     "@types/node": "~16.11",
     "@typescript-eslint/eslint-plugin": "~5.14",
     "@typescript-eslint/parser": "~5.14",
+    "@types/memoizee": "^0.4.7",
+    "@types/node-fetch": "^2.6.1",
     "eslint": "~8.11",
     "eslint-config-prettier": "~8.5",
     "eslint-plugin-jest": "~26.1",
@@ -36,6 +38,9 @@
   "license": "Unlicensed",
   "dependencies": {
     "@netlify/functions": "^1.0.0",
+    "lodash": "^4.17.21",
+    "memoizee": "^0.4.15",
+    "node-fetch": "^3.2.3",
     "tslib": "~2.3.1"
   }
 }
