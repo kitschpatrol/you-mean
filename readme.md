@@ -75,14 +75,8 @@ Response:
 pnpm i
 ```
 
-### Iteration
+### Testing
 
 ```sh
-pnpm run test:watch
-```
-
-### Local Netlify Function testing
-
-```sh
-pnpm run build:watch-netlify
+pnpm run watch
 ```

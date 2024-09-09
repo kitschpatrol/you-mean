@@ -26,10 +26,9 @@
 		"generative"
 	],
 	"scripts": {
-		"clean": "rimraf ./pnpm-lock.yaml && git clean -fdX",
+		"clean": "rimraf ./pnpm-lock.yaml ; git clean -fdX",
 		"fix": "shared-config --fix",
 		"lint": "shared-config --lint",
-		"start": "node build/src/main.js",
 		"test": "vitest"
 	},
 	"dependencies": {
