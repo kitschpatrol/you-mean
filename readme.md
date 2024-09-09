@@ -6,6 +6,20 @@
 
 <!-- /title -->
 
+<!-- badges {
+  custom: {
+    "Netlify Status": {
+      image: "https://api.netlify.com/api/v1/badges/6aabc091-087c-4398-8183-f82ccf2f5425/deploy-status",
+      link: "https://app.netlify.com/sites/you-mean/deploys",
+    },
+  }
+} -->
+
+[![License: Unlicensed](https://img.shields.io/badge/License-Unlicensed-yellow.svg)](https://opensource.org/licenses/Unlicensed)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6aabc091-087c-4398-8183-f82ccf2f5425/deploy-status)](https://app.netlify.com/sites/you-mean/deploys)
+
+<!-- /badges -->
+
 <!-- description -->
 
 **Imagine text through Google search suggestions.**

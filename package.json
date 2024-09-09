@@ -26,6 +26,7 @@
 		"generative"
 	],
 	"scripts": {
+		"clean": "rimraf ./pnpm-lock.yaml && git clean -fdX",
 		"fix": "shared-config --fix",
 		"lint": "shared-config --lint",
 		"start": "node build/src/main.js",
@@ -38,7 +39,6 @@
 		"node-fetch": "^3.3.2"
 	},
 	"devDependencies": {
-		"@jest/globals": "^29.7.0",
 		"@kitschpatrol/shared-config": "^4.7.5",
 		"@types/lodash": "^4.17.7",
 		"@types/memoizee": "^0.4.11",
