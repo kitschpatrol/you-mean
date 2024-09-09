@@ -54,7 +54,7 @@ console.log(transformedText)
 Request
 
 ```sh
-/api/suggestify?text=what%20hath%20god%20wrought%20on%20this%20strange%20day%20is%20so%20very%20strange%0A%0Awhat%20hath%20god%20wrought%20on%20this%20strange%20day%20is%20so%20very%20strange%0Aso%20do%20you%20like%20stuff
+curl -s "https://you-mean.netlify.app/api/suggestify?text=what%20hath%20god%20wrought" | jq
 ```
 
 Response:
@@ -62,8 +62,8 @@ Response:
 ```json
 {
   "status": "success",
-  "youSaid": "what hath god wrought on this strange day is so very strange\n\nwhat hath god wrought on this strange day is so very strange\nso do you like stuff",
-  "youMeant": "what hath god wrought the transformation of america strange day is coming it feels so very strange that it could be this way\n\nwhat hath god wrought the transformation of america strange day is coming it feels so very strange that it could be this way\nso do you like stuff meme"
+  "youSaid": "what hath god wrought",
+  "youMeant": "what hath god wrought meaning"
 }
 ```
 
