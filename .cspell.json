@@ -1,0 +1,14 @@
+{
+	"$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+	"import": "@kitschpatrol/cspell-config",
+	"ignorePaths": [],
+	"words": [
+		"deburr",
+		"memoizee",
+		"nosniff",
+		"SAMEORIGIN",
+		"suggestification",
+		"suggestified",
+		"suggestify"
+	]
+}
