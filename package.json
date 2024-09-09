@@ -35,15 +35,13 @@
 	"dependencies": {
 		"@netlify/functions": "^2.8.1",
 		"lodash": "^4.17.21",
-		"memoizee": "^0.4.17",
-		"node-fetch": "^3.3.2"
+		"memoizee": "^0.4.17"
 	},
 	"devDependencies": {
 		"@kitschpatrol/shared-config": "^4.7.5",
 		"@types/lodash": "^4.17.7",
 		"@types/memoizee": "^0.4.11",
 		"@types/node": "^20.16.5",
-		"@types/node-fetch": "^2.6.11",
 		"netlify-cli": "^17.35.0",
 		"rimraf": "^6.0.1",
 		"typescript": "^5.5.4",

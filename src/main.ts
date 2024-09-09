@@ -1,7 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/naming-convention
 import _ from 'lodash'
 import memoize from 'memoizee'
-import fetch from 'node-fetch'
 
 // Caching async functions is tricky... this memoization library seems to work
 const getSuggestion = memoize(async (phrase: string): Promise<string> => {
@@ -20,6 +19,7 @@ const getSuggestion = memoize(async (phrase: string): Promise<string> => {
 		'https://suggestqueries.google.com/complete/search?output=firefox&q=' + phrase + '%20',
 	)
 
+	// eslint-disable-next-line n/no-unsupported-features/node-builtins
 	const response = await fetch(url.href)
 	if (response.ok) {
 		const suggestions = (await response.json()) as string[][]
