@@ -3,10 +3,7 @@
 	"version": "1.0.2",
 	"type": "module",
 	"description": "Imagine text through Google search suggestions.",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/kitschpatrol/you-mean.git"
-	},
+	"repository": "github:kitschpatrol/you-mean",
 	"homepage": "https://frontiernerds.com/projects/you-mean",
 	"author": {
 		"name": "Eric Mika",
@@ -15,7 +12,7 @@
 	},
 	"license": "Unlicensed",
 	"private": true,
-	"packageManager": "pnpm@9.9.0",
+	"packageManager": "pnpm@9.10.0",
 	"engines": {
 		"node": ">=20.0.0",
 		"pnpm": ">=9.0.0"
@@ -26,7 +23,7 @@
 		"generative"
 	],
 	"scripts": {
-		"clean": "rimraf ./pnpm-lock.yaml ; git clean -fdX",
+		"clean": "git rm -f pnpm-lock.yaml ; git clean -fdX",
 		"fix": "shared-config --fix",
 		"lint": "shared-config --lint",
 		"test": "vitest"
@@ -37,12 +34,12 @@
 		"memoizee": "^0.4.17"
 	},
 	"devDependencies": {
-		"@kitschpatrol/shared-config": "^4.7.5",
+		"@kitschpatrol/dict-en-wiktionary": "^1.0.2",
+		"@kitschpatrol/shared-config": "^4.7.9",
 		"@types/lodash": "^4.17.7",
 		"@types/memoizee": "^0.4.11",
-		"@types/node": "^20.16.5",
-		"rimraf": "^6.0.1",
-		"typescript": "^5.5.4",
-		"vitest": "^2.0.5"
+		"@types/node": "20.0.0",
+		"typescript": "^5.6.2",
+		"vitest": "^2.1.1"
 	}
 }
