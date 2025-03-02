@@ -34,15 +34,15 @@ It's implemented in TypeScript + Node.js, and is exposed through a simple API se
 
 It's referenced on Frontier Nerds at the following URLs:
 
-- <https://frontiernerds.com/you-mean>
-- <https://frontiernerds.com/projects/you-mean>
+- https://frontiernerds.com/you-mean
+- https://frontiernerds.com/projects/you-mean
 
 ## Usage
 
 ### As a Node library
 
 ```ts
-import { suggestify } from '../../src/main'
+import { suggestify } from './src/main'
 
 const transformedText = await suggestify('what do i really mean?')
 

@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/naming-convention
+// eslint-disable-next-line ts/naming-convention
 import _ from 'lodash'
 import memoize from 'memoizee'
 
@@ -19,13 +19,13 @@ const getSuggestion = memoize(async (phrase: string): Promise<string> => {
 		'https://suggestqueries.google.com/complete/search?output=firefox&q=' + phrase + '%20',
 	)
 
-	// eslint-disable-next-line n/no-unsupported-features/node-builtins
 	const response = await fetch(url.href)
 	if (response.ok) {
 		const suggestions = (await response.json()) as string[][]
 		const firstSuggestion = suggestions[1][0]
 
 		// Special case for single words with no suggestions...
+		// eslint-disable-next-line ts/no-unnecessary-condition
 		if (firstSuggestion === undefined && _.words(phrase).length === 1) {
 			// Console.log("Giving up on: " + phrase);
 			return phrase
@@ -49,6 +49,7 @@ async function suggestifyPhrase(phrase: string): Promise<string> {
 
 	let suggestion = await getSuggestion(words.join(' '))
 
+	// eslint-disable-next-line ts/no-unnecessary-condition
 	while (suggestion === undefined) {
 		// Try to suggest based on as much of the original line as possible, then
 		// walk left to try for matches on increasingly atomic fragments
@@ -80,6 +81,7 @@ async function suggestifyLine(line: string, maxWordsPerPhrase = 8): Promise<stri
 	return phraseReconstituted.join(' ')
 }
 
+// eslint-disable-next-line jsdoc/require-jsdoc
 export async function suggestify(sourceText: string): Promise<string> {
 	const cleanText = _.deburr(sourceText)
 	const lines = _.split(cleanText, /\r\n|\r|\n/)
