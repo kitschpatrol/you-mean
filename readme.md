@@ -15,7 +15,7 @@
   }
 } -->
 
-[![License: Unlicensed](https://img.shields.io/badge/License-Unlicensed-yellow.svg)](https://opensource.org/licenses/Unlicensed)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/6aabc091-087c-4398-8183-f82ccf2f5425/deploy-status)](https://app.netlify.com/sites/you-mean/deploys)
 
 <!-- /badges -->
@@ -28,14 +28,14 @@
 
 ## Overview
 
-This is a service which processes text through Google Search's auto-complete algorithm.
+This is a service which generates text through Google Search's auto-complete algorithm. It was created in 2010.
 
-It's implemented in TypeScript + Node.js, and is exposed through a simple API service intended for deployment on Netlify. It could probably be deployed to Cloudflare Workers as well since it does not leverage node-specific APIs. The service was ported from its original Python implementation (saved in `/Archive`) in March 2022.
+It's implemented in TypeScript + Node.js, and is exposed through a simple API service intended for deployment on Netlify. It could probably be deployed to Cloudflare Workers as well since it does not leverage node-specific APIs. The service was ported from its original Python implementation (saved in `/archive`) in March 2022.
 
 It's referenced on Frontier Nerds at the following URLs:
 
-- https://frontiernerds.com/you-mean
-- https://frontiernerds.com/projects/you-mean
+- <https://frontiernerds.com/you-mean>
+- <https://frontiernerds.com/projects/you-mean>
 
 ## Usage
 

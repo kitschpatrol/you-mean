@@ -21,6 +21,7 @@ const getSuggestion = memoize(async (phrase: string): Promise<string> => {
 
 	const response = await fetch(url.href)
 	if (response.ok) {
+		// eslint-disable-next-line ts/no-unsafe-type-assertion
 		const suggestions = (await response.json()) as string[][]
 		const firstSuggestion = suggestions[1][0]
 

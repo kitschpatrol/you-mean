@@ -1,4 +1,4 @@
-import { type Handler } from '@netlify/functions'
+import type { Handler } from '@netlify/functions'
 import { suggestify } from '../../src/main'
 
 const handler: Handler = async (event) => {

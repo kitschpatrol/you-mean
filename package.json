@@ -1,19 +1,21 @@
 {
 	"name": "you-mean",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"private": true,
 	"description": "Imagine text through Google search suggestions.",
 	"keywords": [
 		"itp",
 		"google",
-		"generative"
+		"generative",
+		"ai",
+		"llm"
 	],
 	"homepage": "https://frontiernerds.com/projects/you-mean",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/kitschpatrol/you-mean.git"
 	},
-	"license": "Unlicensed",
+	"license": "UNLICENSED",
 	"author": {
 		"name": "Eric Mika",
 		"email": "eric@ericmika.com",
@@ -27,31 +29,21 @@
 		"test": "vitest"
 	},
 	"dependencies": {
-		"@netlify/functions": "^3.0.0",
+		"@netlify/functions": "^5.0.1",
 		"lodash": "^4.17.21",
 		"memoizee": "^0.4.17"
 	},
 	"devDependencies": {
 		"@kitschpatrol/dict-en-wiktionary": "^1.1.1",
-		"@kitschpatrol/shared-config": "^5.2.0",
-		"@types/lodash": "^4.17.16",
-		"@types/memoizee": "^0.4.11",
-		"@types/node": "^22.13.9",
-		"typescript": "~5.7.3",
-		"vitest": "^3.0.7"
+		"@kitschpatrol/shared-config": "^5.8.1",
+		"@types/lodash": "^4.17.20",
+		"@types/memoizee": "^0.4.12",
+		"@types/node": "^22.19.0",
+		"typescript": "~5.9.3",
+		"vitest": "^4.0.7"
 	},
-	"packageManager": "pnpm@10.5.2",
+	"packageManager": "pnpm@10.20.0",
 	"engines": {
 		"node": ">=22.0.0"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"es5-ext",
-			"esbuild",
-			"puppeteer"
-		],
-		"overrides": {
-			"eslint-plugin-markdown": "^5.1.0"
-		}
 	}
 }
