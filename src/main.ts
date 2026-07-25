@@ -2,13 +2,18 @@
 import _ from 'lodash'
 import memoize from 'memoizee'
 
+const lineBreakRegex = /\r\n|\r|\n/v
+
 // Caching async functions is tricky... this memoization library seems to work
-const getSuggestion = memoize(async (phrase: string): Promise<string> => {
+// Returns undefined if no suggestions are found
+const getSuggestion = memoize(async (phrase: string): Promise<string | undefined> => {
 	// Clean up input
 	phrase = _.trim(phrase)
 
 	// Handle empty strings... (preserve line breaks)
-	if (phrase.length === 0) return phrase
+	if (phrase.length === 0) {
+		return phrase
+	}
 
 	// Old "API" URL was: https://google.com/complete/search?output=toolbar&q=microsoft
 	// New "API" is https://suggestqueries.google.com/complete/search?output=firefox&q=your+text+here
@@ -21,12 +26,11 @@ const getSuggestion = memoize(async (phrase: string): Promise<string> => {
 
 	const response = await fetch(url.href)
 	if (response.ok) {
-		// eslint-disable-next-line ts/no-unsafe-type-assertion
 		const suggestions = (await response.json()) as string[][]
-		const firstSuggestion = suggestions[1][0]
+		const firstSuggestion = suggestions[1]?.[0]
 
 		// Special case for single words with no suggestions...
-		// eslint-disable-next-line ts/no-unnecessary-condition
+
 		if (firstSuggestion === undefined && _.words(phrase).length === 1) {
 			// Console.log("Giving up on: " + phrase);
 			return phrase
@@ -36,7 +40,6 @@ const getSuggestion = memoize(async (phrase: string): Promise<string> => {
 		//   console.log("Found suggestion for: " + phrase);
 		// }
 
-		// Returns undefined if no suggestions are found
 		return firstSuggestion
 	}
 
@@ -50,7 +53,6 @@ async function suggestifyPhrase(phrase: string): Promise<string> {
 
 	let suggestion = await getSuggestion(words.join(' '))
 
-	// eslint-disable-next-line ts/no-unnecessary-condition
 	while (suggestion === undefined) {
 		// Try to suggest based on as much of the original line as possible, then
 		// walk left to try for matches on increasingly atomic fragments
@@ -85,7 +87,7 @@ async function suggestifyLine(line: string, maxWordsPerPhrase = 8): Promise<stri
 // eslint-disable-next-line jsdoc/require-jsdoc
 export async function suggestify(sourceText: string): Promise<string> {
 	const cleanText = _.deburr(sourceText)
-	const lines = _.split(cleanText, /\r\n|\r|\n/)
+	const lines = _.split(cleanText, lineBreakRegex)
 	const meantLines = await Promise.all(lines.map(async (line) => suggestifyLine(line)))
 	const youMeant = meantLines.join('\n')
 	return youMeant
