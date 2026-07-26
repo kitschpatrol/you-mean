@@ -10,13 +10,10 @@ export default {
 		const url = new URL(request.url)
 
 		if (url.pathname !== '/api/you-mean') {
-			return Response.json(
-				{ reason: 'Not found', status: 'error' },
-				{
-					headers: responseHeaders,
-					status: 404,
-				},
-			)
+			// The route pattern needs a trailing wildcard to match query strings,
+			// so stray paths under /api/you-mean land here too — hand them to
+			// the origin site for a proper 404 instead of answering from the worker
+			return fetch(request)
 		}
 
 		const response: Record<string, unknown> = {}

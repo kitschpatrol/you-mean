@@ -3,7 +3,7 @@
 	"name": "you-mean",
 	"main": "src/worker.ts",
 	"compatibility_date": "2026-07-24",
-	"routes": ["frontiernerds.com/api/you-mean"],
+	"routes": ["frontiernerds.com/api/you-mean*"],
 	"observability": {
 		"enabled": true,
 	},

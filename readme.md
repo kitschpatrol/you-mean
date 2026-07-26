@@ -80,19 +80,11 @@ pnpm dev
 ### Deployment
 
 ```sh
-pnpm run deploy
+pnpm run release
 ```
 
 The service deploys as a single Cloudflare Worker, bundled directly from `src/worker.ts` — there's no build step or output directory.
 
-Rather than hosting anything on a `workers.dev` subdomain, the worker is attached to the `frontiernerds.com` zone via a route defined in `wrangler.jsonc`:
-
-```jsonc
-{
-  "routes": ["frontiernerds.com/api/you-mean"],
-}
-```
-
-The pattern has no wildcard, so it matches the `/api/you-mean` path exactly (query strings are ignored during route matching). Requests to any other path — including `/api/you-mean/anything` — pass through Cloudflare to the origin server that hosts the rest of the site. This makes the worker a small API "sidecar" on the main domain: same-origin with the site's pages, with no separate hostname to manage.
+Rather than hosting anything on a `workers.dev` subdomain, the worker is attached to the `frontiernerds.com/api/you-mean*` route in `wrangler.jsonc`.
 
 Deploying requires Cloudflare credentials for the account that owns the `frontiernerds.com` zone, and the zone's DNS record must be proxied (orange cloud) for the route to take effect. Wrangler resolves the zone from the route's hostname at deploy time.
