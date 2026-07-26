@@ -10,6 +10,6 @@ publicHoistPattern:
   - '*remark*'
   - '*stylelint*'
 allowBuilds:
-  es5-ext: true
   esbuild: true
   unrs-resolver: true
+  workerd: true

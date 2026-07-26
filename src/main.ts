@@ -1,12 +1,23 @@
 // eslint-disable-next-line ts/naming-convention
 import _ from 'lodash'
-import memoize from 'memoizee'
 
 const lineBreakRegex = /\r\n|\r|\n/v
 
-// Caching async functions is tricky... this memoization library seems to work
+// Caching the promise also deduplicates concurrent in-flight requests
+const suggestionCache = new Map<string, Promise<string | undefined>>()
+
 // Returns undefined if no suggestions are found
-const getSuggestion = memoize(async (phrase: string): Promise<string | undefined> => {
+async function getSuggestion(phrase: string): Promise<string | undefined> {
+	let cached = suggestionCache.get(phrase)
+	if (cached === undefined) {
+		cached = fetchSuggestion(phrase)
+		suggestionCache.set(phrase, cached)
+	}
+
+	return cached
+}
+
+async function fetchSuggestion(phrase: string): Promise<string | undefined> {
 	// Clean up input
 	phrase = _.trim(phrase)
 
@@ -44,7 +55,7 @@ const getSuggestion = memoize(async (phrase: string): Promise<string | undefined
 	}
 
 	throw new Error(`Bad response for ${url.href} (${response.status}): ${response.statusText}`)
-})
+}
 
 async function suggestifyPhrase(phrase: string): Promise<string> {
 	// Strips punctuation

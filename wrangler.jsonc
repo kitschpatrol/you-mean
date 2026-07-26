@@ -1,0 +1,10 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "you-mean",
+	"main": "src/worker.ts",
+	"compatibility_date": "2026-07-24",
+	"routes": ["frontiernerds.com/api/you-mean"],
+	"observability": {
+		"enabled": true,
+	},
+}

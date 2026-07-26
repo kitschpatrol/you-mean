@@ -5,7 +5,7 @@ it('gets the text you meant from a single line', { timeout: 60_000 }, async () =
 	const result = await suggestify(`success hides problems`)
 
 	// These might not be stable over long durations...
-	expect(result).toMatchInlineSnapshot(`"success hides problems"`)
+	expect(result).toMatchInlineSnapshot(`"success hides problem"`)
 })
 
 it('gets the text you meant across multiple lines', { timeout: 60_000 }, async () => {

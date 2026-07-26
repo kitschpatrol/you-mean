@@ -4,17 +4,9 @@
 
 <!-- /title -->
 
-<!-- badges ({
-  custom: {
-    "Netlify Status": {
-      image: "https://api.netlify.com/api/v1/badges/6aabc091-087c-4398-8183-f82ccf2f5425/deploy-status",
-      link: "https://app.netlify.com/sites/you-mean/deploys",
-    },
-  }
-}) -->
+<!-- badges -->
 
 [![CI](https://github.com/kitschpatrol/you-mean/actions/workflows/ci.yml/badge.svg)](https://github.com/kitschpatrol/you-mean/actions/workflows/ci.yml)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/6aabc091-087c-4398-8183-f82ccf2f5425/deploy-status)](https://app.netlify.com/sites/you-mean/deploys)
 
 <!-- /badges -->
 
@@ -28,7 +20,7 @@
 
 This is a service which generates text through Google Search's auto-complete algorithm. It was created in 2010.
 
-It's implemented in TypeScript + Node.js, and is exposed through a simple API service intended for deployment on Netlify. It could probably be deployed to Cloudflare Workers as well since it does not leverage node-specific APIs. The service was ported from its original Python implementation (saved in `/archive`) in March 2022.
+It's implemented in TypeScript, and is exposed through a simple API service deployed on Cloudflare Workers. The service was ported from its original Python implementation (saved in `/archive`) in March 2022, and migrated from Netlify Functions to Cloudflare Workers in July 2026.
 
 It's referenced on Frontier Nerds at the following URLs:
 
@@ -52,7 +44,7 @@ console.log(transformedText)
 Request
 
 ```sh
-curl -s "https://you-mean.netlify.app/api/suggestify?text=what%20hath%20god%20wrought" | jq
+curl -s "https://frontiernerds.com/api/you-mean?text=what%20hath%20god%20wrought" | jq
 ```
 
 Response:
@@ -76,5 +68,31 @@ pnpm i
 ### Testing
 
 ```sh
-pnpm run watch
+pnpm test
 ```
+
+### Local development
+
+```sh
+pnpm dev
+```
+
+### Deployment
+
+```sh
+pnpm run deploy
+```
+
+The service deploys as a single Cloudflare Worker, bundled directly from `src/worker.ts` — there's no build step or output directory.
+
+Rather than hosting anything on a `workers.dev` subdomain, the worker is attached to the `frontiernerds.com` zone via a route defined in `wrangler.jsonc`:
+
+```jsonc
+{
+  "routes": ["frontiernerds.com/api/you-mean"],
+}
+```
+
+The pattern has no wildcard, so it matches the `/api/you-mean` path exactly (query strings are ignored during route matching). Requests to any other path — including `/api/you-mean/anything` — pass through Cloudflare to the origin server that hosts the rest of the site. This makes the worker a small API "sidecar" on the main domain: same-origin with the site's pages, with no separate hostname to manage.
+
+Deploying requires Cloudflare credentials for the account that owns the `frontiernerds.com` zone, and the zone's DNS record must be proxied (orange cloud) for the route to take effect. Wrangler resolves the zone from the route's hostname at deploy time.
