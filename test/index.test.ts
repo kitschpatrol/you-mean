@@ -1,5 +1,5 @@
 import { expect, it } from 'vitest'
-import { suggestify } from '../src/main'
+import { suggestify } from '../src/index'
 
 it('gets the text you meant from a single line', { timeout: 60_000 }, async () => {
 	const result = await suggestify(`success hides problems`)

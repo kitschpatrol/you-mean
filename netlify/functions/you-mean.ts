@@ -1,4 +1,4 @@
-import { suggestify } from '../../src/main'
+import { suggestify } from '../../src/index'
 
 const responseHeaders = {
 	'access-control-allow-origin': '*',

@@ -11,8 +11,9 @@ publicHoistPattern:
   - '*stylelint*'
 allowBuilds:
   esbuild: true
-  netlify-cli: false
-  sharp: false
-  unix-dgram: false
+  netlify-cli: true
+  oxc-resolver: true
+  sharp: true
+  unix-dgram: true
   unrs-resolver: true
   workerd: true

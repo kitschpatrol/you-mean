@@ -6,6 +6,7 @@
 
 <!-- badges -->
 
+[![License: CC-BY-NC-SA-4.0](https://img.shields.io/badge/License-CC--BY--NC--SA--4.0-yellow.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode)
 [![CI](https://github.com/kitschpatrol/you-mean/actions/workflows/ci.yml/badge.svg)](https://github.com/kitschpatrol/you-mean/actions/workflows/ci.yml)
 
 <!-- /badges -->
@@ -29,16 +30,6 @@ It's referenced on Frontier Nerds at the following URLs:
 
 ## Usage
 
-### As a Node library
-
-```ts
-import { suggestify } from './src/main'
-
-const transformedText = await suggestify('what do i really mean?')
-
-console.log(transformedText)
-```
-
 ### Via web API
 
 Request
@@ -57,31 +48,23 @@ Response:
 }
 ```
 
-## Development
+### As a Node library
 
-### Setup
+_This package is not published to NPM, so module resolution is up to the user._
 
-```sh
-pnpm i
-```
+```ts
+import { suggestify } from 'you-mean'
 
-### Testing
+const transformedText = await suggestify('what do i really mean?')
 
-```sh
-pnpm test
-```
-
-### Local development
-
-```sh
-pnpm dev
+console.log(transformedText)
 ```
 
 ### Deployment
 
-The service can deploy to either Cloudflare Workers or Netlify Functions. Both serve the same API at the `/api/you-mean` path, backed by the shared logic in `src/main.ts`.
+The service can deploy to either Cloudflare Workers or Netlify Functions. Both serve the same API at the `/api/you-mean` path, backed by the shared logic in `src/index.ts`, which both platforms bundle directly at deploy time. The separate `dist/` build (`pnpm run build`) exists only for consuming the package directly as a library.
 
-Note that Google blocks requests from Cloudflare's egress IPs to the suggestion endpoint (intermittent `403 Forbidden` responses from `suggestqueries.google.com`), so Netlify is the target that actually works in production. The Cloudflare deployment is retained in case the situation changes.
+Note that Google blocks requests from Cloudflare's egress IPs to the suggestion endpoint (intermittent `403 Forbidden` responses from `suggestqueries.google.com`), so Netlify is the target that actually works in production. The Cloudflare deployment path is retained in case the situation changes.
 
 #### Netlify
 
@@ -99,8 +82,16 @@ Deploying requires Netlify credentials (`netlify login`) and a linked site (`net
 pnpm run deploy-cloudflare
 ```
 
-The service deploys as a single Cloudflare Worker, bundled directly from `src/worker.ts` — there's no build step or output directory.
+The service deploys as a single Cloudflare Worker, bundled from the entry point in `cloudflare/worker.ts`.
 
 Rather than hosting anything on a `workers.dev` subdomain, the worker is attached to the `frontiernerds.com/api/you-mean*` route in `wrangler.jsonc`.
 
 Deploying requires Cloudflare credentials for the account that owns the `frontiernerds.com` zone, and the zone's DNS record must be proxied (orange cloud) for the route to take effect. Wrangler resolves the zone from the route's hostname at deploy time. Local development: `pnpm run dev`.
+
+<!-- license -->
+
+## License
+
+[CC-BY-NC-SA-4.0](license.txt) © [Eric Mika](https://ericmika.com)
+
+<!-- /license -->

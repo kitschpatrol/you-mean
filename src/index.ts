@@ -1,7 +1,7 @@
 // eslint-disable-next-line ts/naming-convention
 import _ from 'lodash'
 
-const lineBreakRegex = /\r\n|\r|\n/v
+const LINE_BREAK_REGEX = /\r\n|\r|\n/v
 
 // Caching the promise also deduplicates concurrent in-flight requests
 const suggestionCache = new Map<string, Promise<string | undefined>>()
@@ -103,7 +103,7 @@ async function suggestifyLine(line: string, maxWordsPerPhrase = 8): Promise<stri
 // eslint-disable-next-line jsdoc/require-jsdoc
 export async function suggestify(sourceText: string): Promise<string> {
 	const cleanText = _.deburr(sourceText)
-	const lines = _.split(cleanText, lineBreakRegex)
+	const lines = _.split(cleanText, LINE_BREAK_REGEX)
 	const meantLines = await Promise.all(lines.map(async (line) => suggestifyLine(line)))
 	const youMeant = meantLines.join('\n')
 	return youMeant
