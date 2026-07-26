@@ -23,4 +23,6 @@ vendor/
 # Customizations
 /.claude
 !/dist/
+/.netlify
 /.wrangler
+/deno.lock

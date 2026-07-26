@@ -79,12 +79,28 @@ pnpm dev
 
 ### Deployment
 
+The service can deploy to either Cloudflare Workers or Netlify Functions. Both serve the same API at the `/api/you-mean` path, backed by the shared logic in `src/main.ts`.
+
+Note that Google blocks requests from Cloudflare's egress IPs to the suggestion endpoint (intermittent `403 Forbidden` responses from `suggestqueries.google.com`), so Netlify is the target that actually works in production. The Cloudflare deployment is retained in case the situation changes.
+
+#### Netlify
+
 ```sh
-pnpm run release
+pnpm run deploy-netlify
+```
+
+The function in `netlify/functions/you-mean.ts` uses the modern Netlify Functions API (web-standard `Request`/`Response`), with its route declared via `export const config = { path: '/api/you-mean' }` — no redirects needed in `netlify.toml`. The `_site` directory is published as a static placeholder site.
+
+Deploying requires Netlify credentials (`netlify login`) and a linked site (`netlify link` on first run). Local development: `pnpm run dev-netlify`.
+
+#### Cloudflare
+
+```sh
+pnpm run deploy-cloudflare
 ```
 
 The service deploys as a single Cloudflare Worker, bundled directly from `src/worker.ts` — there's no build step or output directory.
 
 Rather than hosting anything on a `workers.dev` subdomain, the worker is attached to the `frontiernerds.com/api/you-mean*` route in `wrangler.jsonc`.
 
-Deploying requires Cloudflare credentials for the account that owns the `frontiernerds.com` zone, and the zone's DNS record must be proxied (orange cloud) for the route to take effect. Wrangler resolves the zone from the route's hostname at deploy time.
+Deploying requires Cloudflare credentials for the account that owns the `frontiernerds.com` zone, and the zone's DNS record must be proxied (orange cloud) for the route to take effect. Wrangler resolves the zone from the route's hostname at deploy time. Local development: `pnpm run dev`.

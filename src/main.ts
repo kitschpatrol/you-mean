@@ -35,7 +35,12 @@ async function fetchSuggestion(phrase: string): Promise<string | undefined> {
 		'https://suggestqueries.google.com/complete/search?output=firefox&q=' + phrase + '%20',
 	)
 
-	const response = await fetch(url.href)
+	const response = await fetch(url.href, {
+		headers: {
+			'User-Agent':
+				'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:140.0) Gecko/20100101 Firefox/140.0',
+		},
+	})
 	if (response.ok) {
 		const suggestions = (await response.json()) as string[][]
 		const firstSuggestion = suggestions[1]?.[0]
