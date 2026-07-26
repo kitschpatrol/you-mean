@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"scripts": {
+		"build": "echo 'No build needed'",
 		"clean": "shx rm -f pnpm-lock.yaml && git clean -fdX -e !.claude/",
 		"dev": "wrangler dev",
 		"fix": "ksc fix",
