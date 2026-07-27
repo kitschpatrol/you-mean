@@ -35,7 +35,7 @@ It's referenced on Frontier Nerds at the following URLs:
 Request
 
 ```sh
-curl -s "https://frontiernerds.com/api/you-mean?text=what%20hath%20god%20wrought" | jq
+curl -s "https://you-mean.netlify.app/api/you-mean?text=what%20hath%20god%20wrought" | jq
 ```
 
 Response:
