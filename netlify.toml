@@ -1,5 +1,5 @@
 [build]
-publish = "_site"
+publish = '_site'
 
 [build.environment]
-NODE_VERSION = "24"
+NODE_VERSION = '24'

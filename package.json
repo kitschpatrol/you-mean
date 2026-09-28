@@ -33,7 +33,7 @@
 	"types": "./dist/index.d.ts",
 	"scripts": {
 		"build": "tsdown --tsconfig tsconfig.build.json --platform neutral --dts",
-		"clean": "shx rm -f pnpm-lock.yaml && git clean -fdX -e !.claude/",
+		"clean-deep": "shx rm -f pnpm-lock.yaml && git clean -fdX -e !.claude/",
 		"deploy-cloudflare": "wrangler deploy",
 		"deploy-netlify": "netlify deploy --prod",
 		"dev-cloudflare": "wrangler dev",
@@ -48,19 +48,19 @@
 	},
 	"devDependencies": {
 		"@kitschpatrol/dict-en-wiktionary": "^1.5.0",
-		"@kitschpatrol/shared-config": "^8.5.0",
-		"@types/lodash": "^4.17.24",
+		"@kitschpatrol/shared-config": "^8.10.1",
+		"@types/lodash": "^4.17.25",
 		"@types/node": "~24.13.3",
-		"bumpp": "^12.0.0",
-		"netlify-cli": "^27.0.0",
+		"bumpp": "^12.3.0",
+		"netlify-cli": "^27.10.1",
 		"shx": "^0.4.0",
-		"tsdown": "^0.22.14",
+		"tsdown": "^0.23.0",
 		"typescript": "~6.0.3",
-		"vitest": "^4.1.10",
-		"wrangler": "^4.114.0"
+		"vitest": "^5.0.2",
+		"wrangler": "^4.143.0"
 	},
-	"packageManager": "pnpm@11.15.0",
+	"packageManager": "pnpm@12.6.0",
 	"engines": {
-		"node": ">=24.16.0"
+		"node": "^24.16.0 || >=26.3.0"
 	}
 }

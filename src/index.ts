@@ -77,11 +77,9 @@ async function suggestifyPhrase(phrase: string): Promise<string> {
 		suggestion = await getSuggestion(words.join(' '))
 	}
 
-	if (leftoverWords.length > 0) {
-		return [suggestion, await suggestifyPhrase(leftoverWords.join(' '))].join(' ')
-	}
-
-	return suggestion
+	return leftoverWords.length > 0
+		? [suggestion, await suggestifyPhrase(leftoverWords.join(' '))].join(' ')
+		: suggestion
 }
 
 async function suggestifyLine(line: string, maxWordsPerPhrase = 8): Promise<string> {

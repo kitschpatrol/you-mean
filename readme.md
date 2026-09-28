@@ -21,7 +21,7 @@
 
 This is a service which generates text through Google Search's auto-complete algorithm. It was created in 2010.
 
-It's implemented in TypeScript, and is exposed through a simple API service deployed on Cloudflare Workers. The service was ported from its original Python implementation (saved in `/archive`) in March 2022, and migrated from Netlify Functions to Cloudflare Workers in July 2026.
+It's implemented in TypeScript, and is exposed through a simple API service available through Netlify Functions. The service was ported from its original Python implementation (saved in `/archive`) in March 2022.
 
 It's referenced on Frontier Nerds at the following URLs:
 
