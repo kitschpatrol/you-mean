@@ -86,7 +86,7 @@ The service deploys as a single Cloudflare Worker, bundled from the entry point 
 
 Rather than hosting anything on a `workers.dev` subdomain, the worker is attached to the `frontiernerds.com/api/you-mean*` route in `wrangler.jsonc`.
 
-Deploying requires Cloudflare credentials for the account that owns the `frontiernerds.com` zone, and the zone's DNS record must be proxied (orange cloud) for the route to take effect. Wrangler resolves the zone from the route's hostname at deploy time. Local development: `pnpm run dev`.
+Deploying requires Cloudflare credentials for the account that owns the `frontiernerds.com` zone, and the zone's DNS record must be proxied (orange cloud) for the route to take effect. Wrangler resolves the zone from the route's hostname at deploy time. Local development: `pnpm run dev-cloudflare`.
 
 <!-- license -->
 
