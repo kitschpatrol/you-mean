@@ -21,7 +21,7 @@
 
 This is a service which generates text through Google Search's auto-complete algorithm. It was created in 2010.
 
-It's implemented in TypeScript, and is exposed through a simple API service available through Netlify Functions. The service was ported from its original Python implementation (saved in `/Archive`) in March 2022.
+It's implemented in TypeScript, and is exposed through a simple API service available through Cloudflare Workers. The service was ported from its original Python implementation (saved in `/Archive`) in March 2022.
 
 It's referenced on Frontier Nerds at the following URLs:
 
@@ -35,7 +35,7 @@ It's referenced on Frontier Nerds at the following URLs:
 Request
 
 ```sh
-curl -s "https://you-mean.netlify.app/api/you-mean?text=what%20hath%20god%20wrought" | jq
+curl -s "https://frontiernerds.com/api/you-mean?text=what%20hath%20god%20wrought" | jq
 ```
 
 Response:
@@ -62,21 +62,7 @@ console.log(transformedText)
 
 ### Deployment
 
-The service can deploy to either Cloudflare Workers or Netlify Functions. Both serve the same API at the `/api/you-mean` path, backed by the shared logic in `src/index.ts`, which both platforms bundle directly at deploy time. The separate `dist/` build (`pnpm run build`) exists only for consuming the package directly as a library.
-
-Note that Google blocks requests from Cloudflare's egress IPs to the suggestion endpoint (intermittent `403 Forbidden` responses from `suggestqueries.google.com`), so Netlify is the target that actually works in production. The Cloudflare deployment path is retained in case the situation changes.
-
-#### Netlify
-
-```sh
-pnpm run deploy-netlify
-```
-
-The function in `netlify/functions/you-mean.ts` uses the modern Netlify Functions API (web-standard `Request`/`Response`), with its route declared via `export const config = { path: '/api/you-mean' }` — no redirects needed in `netlify.toml`. The `_site` directory is published as a static placeholder site.
-
-Deploying requires Netlify credentials (`netlify login`) and a linked site (`netlify link` on first run). Local development: `pnpm run dev-netlify`.
-
-#### Cloudflare
+The service deploys to Cloudflare Workers, serving the API at the `/api/you-mean` path. Wrangler bundles the shared logic in `src/index.ts` directly at deploy time. The separate `dist/` build (`pnpm run build`) exists only for consuming the package directly as a library.
 
 ```sh
 pnpm run deploy-cloudflare
