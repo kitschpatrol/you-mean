@@ -27,12 +27,12 @@ async function fetchSuggestion(phrase: string): Promise<string | undefined> {
 	}
 
 	// Old "API" URL was: https://google.com/complete/search?output=toolbar&q=microsoft
-	// New "API" is https://suggestqueries.google.com/complete/search?output=firefox&q=your+text+here
+	// New "API" is https://suggestqueries.google.com/complete/search?client=firefox&q=your+text+here
 	// Following documentation here: https://importsem.com/query-google-suggestions-api-with-python/
 
 	// adding a trailing space prevents exact matches
 	const url = new URL(
-		'https://suggestqueries.google.com/complete/search?output=firefox&q=' + phrase + '%20',
+		'https://suggestqueries.google.com/complete/search?client=firefox&q=' + phrase + '%20',
 	)
 
 	const response = await fetch(url.href, {

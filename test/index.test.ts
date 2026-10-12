@@ -22,7 +22,7 @@ it('gets the text you meant from a single line', async () => {
 	await expect(suggestify('success hides problems')).resolves.toBe('success hides problems')
 	expect(fetchMock).toHaveBeenCalledTimes(1)
 	expect(fetchMock.mock.calls[0]?.[0]).toBe(
-		'https://suggestqueries.google.com/complete/search?output=firefox&q=success%20hides%20problems%20',
+		'https://suggestqueries.google.com/complete/search?client=firefox&q=success%20hides%20problems%20',
 	)
 })
 
@@ -81,7 +81,7 @@ it('includes the response body when Google rejects a request', async () => {
 	const { suggestify } = await import('../src/index')
 
 	await expect(suggestify('hello')).rejects.toThrow(
-		'Bad response for https://suggestqueries.google.com/complete/search?output=firefox&q=hello%20 (400): Bad Request\nRequest rejected by upstream',
+		'Bad response for https://suggestqueries.google.com/complete/search?client=firefox&q=hello%20 (400): Bad Request\nRequest rejected by upstream',
 	)
 })
 
@@ -92,6 +92,6 @@ it('preserves the HTTP error when the response body cannot be read', async () =>
 	const { suggestify } = await import('../src/index')
 
 	await expect(suggestify('hello')).rejects.toThrow(
-		'Bad response for https://suggestqueries.google.com/complete/search?output=firefox&q=hello%20 (400): Bad Request',
+		'Bad response for https://suggestqueries.google.com/complete/search?client=firefox&q=hello%20 (400): Bad Request',
 	)
 })
