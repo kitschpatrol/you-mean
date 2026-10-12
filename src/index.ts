@@ -59,7 +59,17 @@ async function fetchSuggestion(phrase: string): Promise<string | undefined> {
 		return firstSuggestion
 	}
 
-	throw new Error(`Bad response for ${url.href} (${response.status}): ${response.statusText}`)
+	let responseBody = ''
+	try {
+		responseBody = await response.text()
+	} catch {
+		// Preserve the HTTP status even if reading the error body fails.
+	}
+
+	const details = responseBody.trim().slice(0, 2000)
+	throw new Error(
+		`Bad response for ${url.href} (${response.status}): ${response.statusText}${details.length > 0 ? `\n${details}` : ''}`,
+	)
 }
 
 async function suggestifyPhrase(phrase: string): Promise<string> {
