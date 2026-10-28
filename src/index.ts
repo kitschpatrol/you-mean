@@ -45,18 +45,8 @@ async function fetchSuggestion(phrase: string): Promise<string | undefined> {
 		const suggestions = (await response.json()) as string[][]
 		const firstSuggestion = suggestions[1]?.[0]
 
-		// Special case for single words with no suggestions...
-
-		if (firstSuggestion === undefined && _.words(phrase).length === 1) {
-			// Console.log("Giving up on: " + phrase);
-			return phrase
-		}
-
-		// If (firstSuggestion !== undefined) {
-		//   console.log("Found suggestion for: " + phrase);
-		// }
-
-		return firstSuggestion
+		// Single words with no suggestions fall back to the word itself
+		return firstSuggestion === undefined && _.words(phrase).length === 1 ? phrase : firstSuggestion
 	}
 
 	let responseBody = ''
