@@ -65,14 +65,16 @@ console.log(transformedText)
 The service deploys to Cloudflare Workers, serving the API at the `/api/you-mean` path. Wrangler bundles the shared logic in `src/index.ts` directly at deploy time. The separate `dist/` build (`pnpm run build`) exists only for consuming the package directly as a library.
 
 ```sh
-pnpm run deploy-cloudflare
+pnpm run release
 ```
+
+The `release` script bumps and commits the version, builds, and then runs `wrangler deploy`.
 
 The service deploys as a single Cloudflare Worker, bundled from the entry point in `cloudflare/worker.ts`.
 
 Rather than hosting anything on a `workers.dev` subdomain, the worker is attached to the `frontiernerds.com/api/you-mean*` route in `wrangler.jsonc`.
 
-Deploying requires Cloudflare credentials for the account that owns the `frontiernerds.com` zone, and the zone's DNS record must be proxied (orange cloud) for the route to take effect. Wrangler resolves the zone from the route's hostname at deploy time. Local development: `pnpm run dev-cloudflare`.
+Deploying requires Cloudflare credentials for the account that owns the `frontiernerds.com` zone, and the zone's DNS record must be proxied (orange cloud) for the route to take effect. Wrangler resolves the zone from the route's hostname at deploy time. Local development: `pnpm run dev`.
 
 <!-- license -->
 
